@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # Copyright (c) 2014 Adafruit Industries
 # Author: Tony DiCola
 
@@ -65,9 +65,10 @@ else:
 # Try to grab a sensor reading.  Use the read_retry method which will retry up
 # to 15 times to get a sensor reading (waiting 2 seconds between each retry).
 SwitchStatus = GPIO.input(24)
+T=0
 while True:
 	humidity, temperature = Adafruit_DHT.read_retry(sensor, pin)
-
+	
 # Un-comment the line below to convert the temperature to Fahrenheit.
 # temperature = temperature * 9/5.0 + 32
 
@@ -79,10 +80,10 @@ while True:
 	SwitchStatus = GPIO.input(24)
 	h0, t0= Adafruit_DHT.read_retry(sensor, pin)
 
-	if(SwitchStatus  == 0):
-		print('ON')
-	else:
-		print('OFF')
+	#if(SwitchStatus  == 0):
+	#	print('ON')
+	#else:
+	#	print('OFF')
 
 	if humidity is not None and temperature is not None:
     		print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
@@ -94,9 +95,3 @@ while True:
 	else:
     		print('Failed to get reading. Try again!')
     		sys.exit(1)
-
-
-
-#payload = {"datapoints":[{"dataChnId":"Hum","values":{"value":humidity}},
-#	{"dataChnId":"Temp","values":{"value":temperature}},{"dataChnId":"SwitchStatus","value":{"value":SwitchStatus}}]}
-
